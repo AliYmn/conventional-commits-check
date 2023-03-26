@@ -1,5 +1,5 @@
 repos:
   - repo: https://github.com/AliYmn/conventional-commits-check
-    rev: master
+    rev: 52a742cc1fd3eaf625b070b891c13941eaa78f9a
     hooks:
       - id: conventional-commits-check

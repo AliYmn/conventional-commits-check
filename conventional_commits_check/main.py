@@ -23,6 +23,10 @@ def check_conventional_commits_emoji(commit_msg: str) -> None:
     pattern = r"^(?P<prefix>[\w]+)(\([a-z]+\))?:\s(?P<message>.+)"
     match = re.match(pattern, commit_msg)
 
+    check_emoji = commit_msg.split(' ')[0] in CONVENTIONAL_EMOJIS.values()
+    if check_emoji:
+        sys.exit(0)
+
     if not match:
         sys.stderr.write(
             "Commit message does not follow Conventional Commits rules.\n")
@@ -44,7 +48,6 @@ def main() -> None:
     except CalledProcessError as e:
         sys.stderr.write(f"Failed to get commit message: {e}\n")
         sys.exit(1)
-
     new_commit_msg = check_conventional_commits_emoji(commit_msg)
 
     try:
