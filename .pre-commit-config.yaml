@@ -1,4 +1,5 @@
 repos:
-  - repo: local
+  - repo: https://github.com/AliYmn/pre-commit-keyword-checker
+    rev: master
     hooks:
       - id: conventional-commits-check

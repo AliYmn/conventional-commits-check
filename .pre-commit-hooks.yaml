@@ -3,4 +3,7 @@
   description: A pre-commit hook to check Conventional Commits and add emojis
   entry: conventional-commits-check
   language: python
+  always_run: true
+  pass_filenames: false
   types: [commit-msg]
+  exclude: ^\.pre-commit-config\.yaml$
