@@ -1,0 +1,6 @@
+- id: conventional-commits-check
+  name: Conventional Commits Check
+  description: A pre-commit hook to check Conventional Commits and add emojis
+  entry: conventional-commits-check
+  language: python
+  types: [commit-msg]
