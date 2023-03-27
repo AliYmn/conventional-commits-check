@@ -1,5 +1,7 @@
 # Conventional Commits Check
 
+<img src="images/result.png">
+
 `conventional-commits-check` is a Python pre-commit hook that enforces Conventional Commits rules on your commit messages and automatically adds relevant emojis based on the commit type.
 
 Conventional Commits is a lightweight convention that provides a set of rules for creating an explicit commit history. This pre-commit hook helps ensure your commit messages adhere to the convention and provides additional context with emojis.
@@ -29,7 +31,7 @@ repos:
 
 
 ```bash
-pre-commit install --hook-type commit-msg
+pre-commit install --hook-type commit-msg -f
 ```
 
 3. Install the conventional-commits-check package:
@@ -37,6 +39,12 @@ pre-commit install --hook-type commit-msg
 
 ```bash
 pip install conventional-commits-check
+```
+
+4. You may need to update the pre-commit package;
+
+```bash
+pre-commit autoupdate
 ```
 
 # Usage
