@@ -32,6 +32,12 @@ repos:
 pre-commit install --hook-type commit-msg
 ```
 
+3. Install the conventional-commits-check package:
+
+
+```bash
+pip install conventional-commits-check
+```
 
 # Usage
 
