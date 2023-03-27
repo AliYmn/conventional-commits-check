@@ -10,13 +10,14 @@ else:
 
 setup(
     name="conventional-commits-check",
-    version="0.1.0",
+    version="0.3.0",
     description="A pre-commit hook to check Conventional Commits and add emojis.",
     author="Ali Yaman",
     packages=find_packages(),
     license="MIT",
     long_description_content_type="text/markdown",
     long_description=README,
+    url="https://github.com/AliYmn/conventional-commits-check",
     install_requires=["pre-commit"],
     entry_points={"console_scripts": [
         "conventional-commits-check = conventional_commits_check.main:main"]},

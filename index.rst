@@ -1,6 +1,6 @@
 # Conventional Commits Check
 
-<center><img src="https://raw.githubusercontent.com/AliYmn/conventional-commits-check/master/images/result.png"></center>
+<img src="https://github.com/AliYmn/conventional-commits-check/raw/master/images/result.png">
 
 `conventional-commits-check` is a Python pre-commit hook that enforces Conventional Commits rules on your commit messages and automatically adds relevant emojis based on the commit type.
 
