@@ -12,7 +12,7 @@ CONVENTIONAL_EMOJIS = {
     "refactor": "🧹",
     "perf": "🚀",
     "test": "🧪",
-    "build": "👷",
+    "build": "🔨",
     "ci": "👷‍♂️",
     "chore": "🧹",
     "revert": "⏪",
