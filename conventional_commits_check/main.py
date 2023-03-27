@@ -1,6 +1,6 @@
+import os
 import re
 import sys
-import os
 from subprocess import check_output, CalledProcessError, STDOUT
 
 
@@ -19,13 +19,9 @@ CONVENTIONAL_EMOJIS = {
 }
 
 
-def check_conventional_commits_emoji(commit_msg: str) -> None:
+def check_conventional_commits(commit_msg: str) -> str:
     pattern = r"^(?P<prefix>[\w]+)(\([a-z]+\))?:\s(?P<message>.+)"
     match = re.match(pattern, commit_msg)
-
-    check_emoji = commit_msg.split(' ')[0] in CONVENTIONAL_EMOJIS.values()
-    if check_emoji:
-        sys.exit(0)
 
     if not match:
         sys.stderr.write(
@@ -41,22 +37,27 @@ def check_conventional_commits_emoji(commit_msg: str) -> None:
     return f"{CONVENTIONAL_EMOJIS[prefix]} {commit_msg}"
 
 
-def main() -> None:
-    try:
-        commit_msg = check_output(
-            ["git", "log", "-1", "--pretty=format:%B"], stderr=STDOUT).decode().strip()
-    except CalledProcessError as e:
-        sys.stderr.write(f"Failed to get commit message: {e}\n")
-        sys.exit(1)
-    new_commit_msg = check_conventional_commits_emoji(commit_msg)
+def main(argv=None) -> None:
+    if argv is None:
+        argv = sys.argv
 
     try:
-        os.system(f'git commit --amend -m "{new_commit_msg}"')
-    except CalledProcessError as e:
-        sys.stderr.write(f"Failed to update commit message: {e}\n")
+        commit_msg_file = argv[1]
+    except IndexError:
+        sys.stderr.write("Error: No commit message file provided.\n")
         sys.exit(1)
 
-    print("Commit message successfully updated with emoji.")
+    try:
+        with open(commit_msg_file, "r") as file:
+            commit_msg = file.read().strip()
+    except FileNotFoundError as e:
+        sys.stderr.write(f"Error: Failed to read commit message file: {e}\n")
+        sys.exit(1)
+
+    new_commit_msg = check_conventional_commits(commit_msg)
+
+    with open(commit_msg_file, "w") as file:
+        file.write(new_commit_msg)
 
 
 if __name__ == "__main__":
