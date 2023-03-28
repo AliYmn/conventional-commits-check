@@ -6,7 +6,7 @@
 
 Conventional Commits is a lightweight convention that provides a set of rules for creating an explicit commit history. This pre-commit hook helps ensure your commit messages adhere to the convention and provides additional context with emojis.
 
-# Automatic Emoji Insertion
+# Automatic Emoji Insertionadsasd
 
 Automatic emoji insertion at the beginning of the Commit 🎉
 
