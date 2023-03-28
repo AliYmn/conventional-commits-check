@@ -41,8 +41,8 @@ repos:
         language: python
         stages: [commit-msg]
         additional_commands:
-          database: "^database(\(.+\))?:"
-          design: "^design(\(.+\))?:"
+          database: "^database(\\(.+\\))?:"
+          design: "^design(\\(.+\\))?:"
         additional_emojis:
           database: "🗃️"
           design: "🎨"
