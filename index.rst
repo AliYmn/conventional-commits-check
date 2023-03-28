@@ -27,7 +27,7 @@ Automatic emoji insertion at the beginning of the Commit 🎉
 # Customization
 
 ```bash
-touch conventional_commits_check_config
+touch conventional_commits_check_config.yaml
 ````
 
 To add custom commit types and emojis, update your `conventional_commits_check_config.yaml` file with the additional_commands and additional_emojis fields. Here's an example:
