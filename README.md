@@ -32,7 +32,8 @@ To add custom commit types and emojis, update your .pre-commit-config.yaml file 
 
 ```yaml
 repos:
-  - repo: local
+  - repo: https://github.com/AliYmn/conventional-commits-check
+    rev: v0.3.0  # Use the latest release version
     hooks:
       - id: conventional-commits-check
         name: Conventional Commits Check
