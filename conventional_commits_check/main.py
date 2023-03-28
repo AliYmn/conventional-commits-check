@@ -34,16 +34,12 @@ EMOJIS = {
 }
 
 
-def load_custom_rules(config_file=".pre-commit-config.yaml"):
+def load_custom_rules(config_file="conventional_commits_check_config.yaml"):
     try:
         with open(config_file, "r") as file:
             config_data = yaml.safe_load(file)
 
-        for repo in config_data["repos"]:
-            if repo.get("repo") == "local":
-                for hook in repo["hooks"]:
-                    if hook["id"] == "conventional-commits-check":
-                        return hook.get("additional_commands", {}), hook.get("additional_emojis", {})
+        return config_data.get("additional_commands", {}), config_data.get("additional_emojis", {})
 
     except FileNotFoundError:
         pass
