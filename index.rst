@@ -4,6 +4,47 @@
 
 Conventional Commits is a lightweight convention that provides a set of rules for creating an explicit commit history. This pre-commit hook helps ensure your commit messages adhere to the convention and provides additional context with emojis.
 
+# Automatic Emoji Insertion
+
+Automatic emoji insertion at the beginning of the Commit 🎉
+
+```json
+{
+    "feat": "✨",
+    "fix": "🐛",
+    "docs": "📚",
+    "style": "💎",
+    "refactor": "🧹",
+    "perf": "🚀",
+    "test": "🧪",
+    "build": "🏗️",
+    "ci": "👷",
+    "chore": "♻️",
+    "revert": "⏪",
+}
+```
+
+# Customization
+
+To add custom commit types and emojis, update your .pre-commit-config.yaml file with the additional_commands and additional_emojis fields. Here's an example:
+
+```yaml
+repos:
+  - repo: local
+    hooks:
+      - id: conventional-commits-check
+        name: Conventional Commits Check
+        entry: conventional-commits-check
+        language: python
+        stages: [commit-msg]
+        additional_commands:
+          database: "^database(\(.+\))?:"
+          design: "^design(\(.+\))?:"
+        additional_emojis:
+          database: "🗃️"
+          design: "🎨"
+````
+
 ## Features
 
 - Checks if commit messages follow the Conventional Commits rules.

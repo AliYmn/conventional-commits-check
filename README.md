@@ -26,7 +26,7 @@ Automatic emoji insertion at the beginning of the Commit 🎉
 }
 ```
 
-# Customization
+# Customization
 
 To add custom commit types and emojis, update your .pre-commit-config.yaml file with the additional_commands and additional_emojis fields. Here's an example:
 
