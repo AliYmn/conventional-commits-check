@@ -1,63 +1,89 @@
-import os
+#!/usr/bin/env python3
+import argparse
 import re
 import sys
-from subprocess import check_output, CalledProcessError, STDOUT
+from typing import Dict
+import yaml
 
+COMMIT_TYPES = {
+    "feat": "^feat(\(.+\))?:",
+    "fix": "^fix(\(.+\))?:",
+    "docs": "^docs(\(.+\))?:",
+    "style": "^style(\(.+\))?:",
+    "refactor": "^refactor(\(.+\))?:",
+    "perf": "^perf(\(.+\))?:",
+    "test": "^test(\(.+\))?:",
+    "build": "^build(\(.+\))?:",
+    "ci": "^ci(\(.+\))?:",
+    "chore": "^chore(\(.+\))?:",
+    "revert": "^revert: ",
+}
 
-CONVENTIONAL_EMOJIS = {
+EMOJIS = {
     "feat": "✨",
     "fix": "🐛",
     "docs": "📚",
-    "style": "💄",
+    "style": "💎",
     "refactor": "🧹",
     "perf": "🚀",
     "test": "🧪",
-    "build": "🔨",
-    "ci": "👷‍♂️",
-    "chore": "🧹",
+    "build": "🏗️",
+    "ci": "👷",
+    "chore": "♻️",
     "revert": "⏪",
 }
 
 
-def check_conventional_commits(commit_msg: str) -> str:
-    pattern = r"^(?P<prefix>[\w]+)(\([a-z]+\))?:\s(?P<message>.+)"
-    match = re.match(pattern, commit_msg)
-
-    if not match:
-        sys.stderr.write(
-            "Commit message does not follow Conventional Commits rules.\n")
-        sys.exit(1)
-
-    prefix = match.group("prefix").lower()
-    message = match.group("message")
-    if prefix not in CONVENTIONAL_EMOJIS:
-        sys.stderr.write(f"Invalid prefix: {prefix}\n")
-        sys.exit(1)
-
-    return f"{CONVENTIONAL_EMOJIS[prefix]} {commit_msg}"
-
-
-def main(argv=None) -> None:
-    if argv is None:
-        argv = sys.argv
-
+def load_custom_rules(config_file=".pre-commit-config.yaml"):
     try:
-        commit_msg_file = argv[1]
-    except IndexError:
-        sys.stderr.write("Error: No commit message file provided.\n")
+        with open(config_file, "r") as file:
+            config_data = yaml.safe_load(file)
+
+        for repo in config_data["repos"]:
+            if repo.get("repo") == "local":
+                for hook in repo["hooks"]:
+                    if hook["id"] == "conventional-commits-check":
+                        return hook.get("additional_commands", {}), hook.get("additional_emojis", {})
+
+    except FileNotFoundError:
+        pass
+
+    return {}, {}
+
+
+def main():
+    additional_commands, additional_emojis = load_custom_rules()
+
+    # Merge additional commands and emojis with the existing ones
+    COMMIT_TYPES.update(additional_commands)
+    EMOJIS.update(additional_emojis)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("commit_message_file")
+    args = parser.parse_args()
+
+    with open(args.commit_message_file, "r") as file:
+        commit_message = file.read()
+
+    commit_type = None
+    for commit, pattern in COMMIT_TYPES.items():
+        if re.match(pattern, commit_message.strip()):
+            commit_type = commit
+            break
+
+    if not commit_type:
+        print("Commit message does not follow Conventional Commits rules.")
         sys.exit(1)
 
-    try:
-        with open(commit_msg_file, "r") as file:
-            commit_msg = file.read().strip()
-    except FileNotFoundError as e:
-        sys.stderr.write(f"Error: Failed to read commit message file: {e}\n")
-        sys.exit(1)
+    emoji = EMOJIS.get(commit_type)
 
-    new_commit_msg = check_conventional_commits(commit_msg)
+    if emoji:
+        new_commit_message = f"{emoji} {commit_message}"
+        with open(args.commit_message_file, "w") as file:
+            file.write(new_commit_message)
 
-    with open(commit_msg_file, "w") as file:
-        file.write(new_commit_msg)
+    print("Commit message follows Conventional Commits rules and has been updated with an emoji.")
+    sys.exit(0)
 
 
 if __name__ == "__main__":

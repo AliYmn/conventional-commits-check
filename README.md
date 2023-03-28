@@ -15,17 +15,37 @@ Automatic emoji insertion at the beginning of the Commit 🎉
     "feat": "✨",
     "fix": "🐛",
     "docs": "📚",
-    "style": "💄",
+    "style": "💎",
     "refactor": "🧹",
     "perf": "🚀",
     "test": "🧪",
-    "build": "🔨",
-    "ci": "👷‍♂️",
-    "chore": "🧹",
+    "build": "🏗️",
+    "ci": "👷",
+    "chore": "♻️",
     "revert": "⏪",
 }
 ```
 
+# Customization
+
+To add custom commit types and emojis, update your .pre-commit-config.yaml file with the additional_commands and additional_emojis fields. Here's an example:
+
+```yaml
+repos:
+  - repo: local
+    hooks:
+      - id: conventional-commits-check
+        name: Conventional Commits Check
+        entry: conventional-commits-check
+        language: python
+        stages: [commit-msg]
+        additional_commands:
+          database: "^database(\(.+\))?:"
+          design: "^design(\(.+\))?:"
+        additional_emojis:
+          database: "🗃️"
+          design: "🎨"
+````
 
 ## Features
 
