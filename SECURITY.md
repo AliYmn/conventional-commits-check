@@ -21,7 +21,7 @@ We do not guarantee that security issues will be addressed in older versions of 
 
 ## Bug Bounty Program
 
-At this time, we do not offer a bug bounty program for `conventional-commits-check`. However, we greatly appreciate and reward responsible disclosure of any security issues. Please email us at [security@conventional-commits-check.com](mailto:security@conventional-commits-check.com) to report any vulnerabilities.
+At this time, we do not offer a bug bounty program for `conventional-commits-check`. However, we greatly appreciate and reward responsible disclosure of any security issues. Please email us at [aliymn.db@gmail.com](mailto:aliymn.db@gmail.com) to report any vulnerabilities.
 
 ## Disclaimer
 
