@@ -4,6 +4,7 @@ import re
 import sys
 from typing import Dict
 import yaml
+import os
 
 COMMIT_TYPES = {
     "feat": "^feat(\(.+\))?:",
@@ -35,17 +36,19 @@ EMOJIS = {
 }
 
 
-def load_custom_rules(config_file="conventional_commits_check_config.yaml"):
+def load_custom_rules(config_file="commits_check_config.yaml"):
+    config_path = os.path.join(os.getcwd(), config_file)
+
     try:
-        with open(config_file, "r") as file:
+        with open(config_path, "r") as file:
             config_data = yaml.safe_load(file)
 
         return config_data.get("additional_commands", {}), config_data.get("additional_emojis", {})
 
     except FileNotFoundError:
-        pass
-
-    return {}, {}
+        print(
+            f"No such file or directory: '{config_path}'. Please make sure the config file is in the correct directory.")
+        sys.exit(1)
 
 
 def main():

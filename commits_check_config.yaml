@@ -1,0 +1,7 @@
+additional_commands:
+  database: "^database(\\(.+\\))?:"
+  design: "^design(\\(.+\\))?:"
+
+additional_emojis:
+  database: "🗃️"
+  design: "🎨"
