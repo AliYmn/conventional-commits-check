@@ -6,7 +6,7 @@
 
 Conventional Commits is a lightweight convention that provides a set of rules for creating an explicit commit history. This pre-commit hook helps ensure your commit messages adhere to the convention and provides additional context with emojis.
 
-# Automatic Emoji Insertionadsasd
+# Automatic Emoji Insertion
 
 Automatic emoji insertion at the beginning of the Commit 🎉
 
@@ -29,12 +29,12 @@ Automatic emoji insertion at the beginning of the Commit 🎉
 # Customization
 
 ```bash
-touch commits_check_config.yaml
+touch conventional_commits_check_config.yaml
 ````
 
 `NOTE` : Please do not leave it blank if you create it.
 
-To add custom commit types and emojis, update your `commits_check_config.yaml` file with the additional_commands and additional_emojis fields. Here's an example:
+To add custom commit types and emojis, update your `conventional_commits_check_config.yaml` file with the additional_commands and additional_emojis fields. Here's an example:
 
 ```yaml
 additional_commands:
