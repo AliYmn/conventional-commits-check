@@ -103,4 +103,4 @@ pre-commit autoupdate
 
 # Usage
 
-Once the hook is added to your project, it will automatically run every time you create a commit. The hook will check the commit messages according to the Conventional Commits rules and add the corresponding emojis. If a commit message does not follow the rules, the commit will be blocked.
+Once the hook is added to your project, it will automatically run every time you create a commit. The hook will check the commit messages according to the Conventional Commits rules and add corresponding emojis. If a commit message does not follow the rules, the commit will be blocked.
