@@ -79,6 +79,7 @@ repos:
     hooks:
       - id: conventional-commits-check
         stages: [commit-msg]
+    args: ["--emoji-disabled"] # Add this argument to disable emojis
 ```
 
 2. Update the pre-commit hooks in your project:
