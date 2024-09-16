@@ -1,6 +1,11 @@
 
 # 🎉 Conventional Commits Check
 
+![PyPI Version](https://img.shields.io/pypi/v/conventional-commits-check)
+![License](https://img.shields.io/github/license/AliYmn/conventional-commits-check)
+![Last Commit](https://img.shields.io/github/last-commit/AliYmn/conventional-commits-check)
+![Issues](https://img.shields.io/github/issues/AliYmn/conventional-commits-check)
+
 ![Result Image](https://raw.githubusercontent.com/AliYmn/conventional-commits-check/master/images/result.png)
 
 `conventional-commits-check` is a powerful and easy-to-use Python pre-commit hook that helps enforce [Conventional Commits](https://www.conventionalcommits.org/) rules on your commit messages. As a bonus, it adds relevant emojis based on your commit types to enhance readability and bring some fun to your commit history! 🚀
