@@ -38,19 +38,15 @@ EMOJIS = {
 def load_custom_rules(config_file="commits_check_config.yaml"):
     config_path = os.path.join(os.getcwd(), config_file)
 
-    try:
-        with open(config_path, "r") as file:
-            config_data = yaml.safe_load(file)
+    if not os.path.exists(config_path):
+        return {}, {}
 
-        return config_data.get("additional_commands", {}), config_data.get(
-            "additional_emojis", {}
-        )
+    with open(config_path, "r") as file:
+        config_data = yaml.safe_load(file)
 
-    except FileNotFoundError:
-        print(
-            f"💥 No such file or directory: '{config_path}'. Please make sure the config file is in the correct directory."
-        )
-        sys.exit(1)
+    return config_data.get("additional_commands", {}), config_data.get(
+        "additional_emojis", {}
+    )
 
 
 def main():
