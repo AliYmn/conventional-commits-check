@@ -58,7 +58,6 @@ commit_types:
         "emoji": "🍻"
     },
  .....
- .....
 ```
 
 ### Customizing Existing Emojis
