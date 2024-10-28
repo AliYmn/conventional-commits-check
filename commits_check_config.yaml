@@ -1,7 +1,4 @@
-additional_commands:
-  database: "^database(\\(.+\\))?:"
-  design: "^design(\\(.+\\))?:"
-
-additional_emojis:
-  database: "🗃️"
-  design: "🎨"
+additional_commit_types:
+  feat:
+      description: Introduce new features.
+      emoji: ✨
