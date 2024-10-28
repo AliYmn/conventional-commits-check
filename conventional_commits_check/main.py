@@ -5,6 +5,7 @@ import sys
 import yaml
 import os
 import pkg_resources
+from conventional_commits_check.commit_types import commit_types
 
 
 def get_regex_pattern(commit_type: str) -> str:
@@ -20,23 +21,14 @@ def get_regex_pattern(commit_type: str) -> str:
     return f"^(. ?)?{commit_type}(\\(.+\\))?\\!?:"
 
 
-def load_rules(config_file):
+def load_rules():
     """
-    Loads commit type rules from a YAML configuration file.
-
-    Args:
-        config_file (str): The path to the configuration file.
+    Loads commit type rules from the Python module.
 
     Returns:
-        dict: A dictionary of additional commit types.
+        dict: A dictionary of commit types.
     """
-    try:
-        # Use pkg_resources to access the file within the package
-        config_data = pkg_resources.resource_string(__name__, config_file)
-        config_data = yaml.safe_load(config_data)
-        return config_data.get("additional_commit_types", {})
-    except FileNotFoundError:
-        return {}
+    return commit_types
 
 
 def get_commit_message(args):
@@ -76,8 +68,8 @@ def check_commit_message(commit_message, args):
     Returns:
         tuple: A tuple containing the updated commit message and a result message.
     """
-    commit_types = load_rules("./conventional_commits_check/commit_types.yaml")
-    additional_commands = load_rules("./commits_check_config.yaml")
+    commit_types = load_rules()
+    additional_commands = load_rules_from_yaml("./commits_check_config.yaml")
     commit_types.update(additional_commands)
     commit_type, props = (None, None)
     for commit_type_for_matching, props in commit_types.items():

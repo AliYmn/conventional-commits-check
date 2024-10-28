@@ -28,29 +28,36 @@ Conventional Commits provide a lightweight convention for creating a clear and e
 
 You can customize the commit types and their associated emojis by modifying the `commit_types.yml` and `commits_check_config.yaml` files. These files allow you to define additional commit types and specify emojis for each type.
 
-### Example : [`commit_types.yml`](https://github.com/AliYmn/conventional-commits-check/blob/master/conventional_commits_check/commit_types.yml)
+### Example : [`commit_types.py`](https://github.com/AliYmn/conventional-commits-check/blob/master/conventional_commits_check/commit_types.py)
 
-```yaml
+```python
 commit_types:
-  feat:
-    description: Introduce new features.
-    emoji: ✨
-  fix:
-    description: Fix a bug.
-    emoji: 🐛
-  docs:
-    description: Add or update documentation.
-    emoji: 📝
-  style:
-    description: Improve structure / format of the code.
-    emoji: 🎨
-  refactor:
-    description: Refactor code.
-    emoji: ♻️
-  test:
-    description: Add, update, or pass tests.
-    emoji: ✅
-  # Add more commit types as needed
+  {
+    "access": {
+        "description": "Improve accessibility.",
+        "emoji": "♿️"
+    },
+    "analytics": {
+        "description": "Add or update analytics or track code.",
+        "emoji": "📈"
+    },
+    "animation": {
+        "description": "Add or update animations and transitions.",
+        "emoji": "💫"
+    },
+    "arch": {
+        "description": "Make architectural changes.",
+        "emoji": "🏗️"
+    },
+    "assets": {
+        "description": "Add or update assets.",
+        "emoji": "🍱"
+    },
+    "beer": {
+        "description": "Write code drunkenly.",
+        "emoji": "🍻"
+    },
+  }
 ```
 
 ### Customizing Existing Emojis
