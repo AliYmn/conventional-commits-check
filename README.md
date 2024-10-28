@@ -12,7 +12,7 @@
 
 ## 📜 What are Conventional Commits?
 
-Conventional Commits provide a lightweight convention for creating a clear and explicit commit history. By using this hook, you'll ensure that your commit messages follow this convention, making your versioning easier to manage and your collaboration more seamless.
+Conventional Commits provide a lightweight convention for creating a clear and explicit commit history. By using this hook, you'll ensure that your commit messages follow this convention, making your versioning easier to manage and your collaboration more seamless
 
 ## 💡 Features
 
