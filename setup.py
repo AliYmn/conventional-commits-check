@@ -13,7 +13,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="conventional-commits-check",
-    version="2.3.0",
+    version="2.4.0",
     description=(
         "A pre-commit hook to check Conventional Commits and add emojis."
     ),
