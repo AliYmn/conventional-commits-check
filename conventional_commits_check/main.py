@@ -97,6 +97,24 @@ def check_commit_message(commit_message, args):
     return commit_message, "🎉 Commit message follows Conventional Commits rules."
 
 
+def load_rules_from_yaml(config_file):
+    """
+    Loads additional commit type rules from a YAML configuration file.
+
+    Args:
+        config_file (str): The path to the configuration file.
+
+    Returns:
+        dict: A dictionary of additional commit types.
+    """
+    try:
+        with open(config_file, 'r') as file:
+            config_data = yaml.safe_load(file)
+            return config_data.get("additional_commit_types", {})
+    except FileNotFoundError:
+        return {}
+
+
 def main():
     """
     Main function to parse arguments, check the commit message, and update it if necessary.

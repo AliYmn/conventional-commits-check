@@ -57,7 +57,8 @@ commit_types:
         "description": "Write code drunkenly.",
         "emoji": "🍻"
     },
-  }
+ .....
+ .....
 ```
 
 ### Customizing Existing Emojis

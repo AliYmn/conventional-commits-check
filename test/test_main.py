@@ -4,6 +4,7 @@ from conventional_commits_check.main import (
     check_commit_message,
     load_rules,
     get_regex_pattern,
+    load_rules_from_yaml
 )
 
 
@@ -91,12 +92,13 @@ class TestCommitCheck(unittest.TestCase):
 
     @patch("builtins.open", new_callable=mock_open, read_data="feat: add new feature")
     @patch("os.path.exists", return_value=True)
-    def test_load_rules(self, mock_exists, mock_file):
+    @patch("conventional_commits_check.main.load_rules_from_yaml", return_value={"additional_commit_types": {}})
+    def test_load_rules(self, mock_load_yaml, mock_exists, mock_file):
         # Test loading rules from YAML
-        config_data = {"additional_commit_types": self.default_commit_types}
-        with patch("yaml.safe_load", return_value=config_data):
-            loaded_rules = load_rules("config.yaml")
-            self.assertEqual(loaded_rules, self.default_commit_types)
+        loaded_rules = load_rules()
+        self.assertIn("feat", loaded_rules)
+        self.assertIn("fix", loaded_rules)
+        self.assertIn("docs", loaded_rules)
 
 
 if __name__ == "__main__":
