@@ -4,6 +4,7 @@ import re
 import sys
 import yaml
 import os
+import pkg_resources
 
 
 def get_regex_pattern(commit_type: str) -> str:
@@ -29,15 +30,13 @@ def load_rules(config_file):
     Returns:
         dict: A dictionary of additional commit types.
     """
-    config_path = os.path.join(os.getcwd(), config_file)
-
-    if not os.path.exists(config_path):
+    try:
+        # Use pkg_resources to access the file within the package
+        config_data = pkg_resources.resource_string(__name__, config_file)
+        config_data = yaml.safe_load(config_data)
+        return config_data.get("additional_commit_types", {})
+    except FileNotFoundError:
         return {}
-
-    with open(config_path, "r") as file:
-        config_data = yaml.safe_load(file)
-
-    return config_data.get("additional_commit_types", {})
 
 
 def get_commit_message(args):

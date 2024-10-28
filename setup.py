@@ -41,4 +41,8 @@ setup(
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
     ],
+    include_package_data=True,
+    package_data={
+        'conventional_commits_check': ['commit_types.yaml'],
+    },
 )

@@ -33,7 +33,10 @@ class TestCommitCheck(unittest.TestCase):
             self.assertEqual(updated_message, "✨ feat: add new feature")
             self.assertEqual(
                 result,
-                "🎉 Commit message follows Conventional Commits rules and has been updated with an emoji.",
+                (
+                    "🎉 Commit message follows Conventional Commits rules "
+                    "and has been updated with an emoji."
+                ),
             )
 
     @patch(
@@ -55,7 +58,11 @@ class TestCommitCheck(unittest.TestCase):
             updated_message, result = check_commit_message(commit_message, args)
             self.assertIsNone(updated_message)
             self.assertEqual(
-                result, "💥 Commit message does not follow Conventional Commits rules."
+                result,
+                (
+                    "💥 Commit message does not follow Conventional Commits "
+                    "rules."
+                ),
             )
 
     @patch("builtins.open", new_callable=mock_open, read_data="fix: bug fix")
