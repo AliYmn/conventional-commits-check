@@ -26,13 +26,12 @@ Conventional Commits provide a lightweight convention for creating a clear and e
 
 ## 🔧 Customization
 
-You can customize the commit types and their associated emojis by modifying the `commit_types.yml` and `commits_check_config.yaml` files. These files allow you to define additional commit types and specify emojis for each type.
+You can customize the commit types and their associated emojis by modifying the `commit_types.py` and `commits_check_config.yaml` files. These files allow you to define additional commit types and specify emojis for each type.
 
 ### Example : [`commit_types.py`](https://github.com/AliYmn/conventional-commits-check/blob/master/conventional_commits_check/commit_types.py)
 
 ```python
-commit_types:
-  {
+commit_types = {
     "access": {
         "description": "Improve accessibility.",
         "emoji": "♿️"
@@ -57,7 +56,8 @@ commit_types:
         "description": "Write code drunkenly.",
         "emoji": "🍻"
     },
- .....
+    # ... more commit types ...
+}
 ```
 
 ### Customizing Existing Emojis
