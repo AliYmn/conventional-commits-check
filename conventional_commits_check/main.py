@@ -10,7 +10,6 @@ def get_regex_pattern(commit_type: str) -> str:
     return f"^(. ?)?{commit_type}(\\(.+\\))?\\!?:"
 
 
-
 def load_rules(config_file):
     config_path = os.path.join(os.getcwd(), config_file)
 
@@ -22,9 +21,11 @@ def load_rules(config_file):
 
     return config_data.get("additional_commit_types", {})
 
+
 def get_commit_message(args):
     with open(args.commit_message_file, "r") as file:
         return file.read()
+
 
 def update_commit_message(args, commit_message):
     with open(args.commit_message_file, "w") as file:
@@ -34,14 +35,13 @@ def update_commit_message(args, commit_message):
 def check_commit_message(commit_message, args):
     commit_types = load_rules("./conventional_commits_check/commit_types.yaml")
     additional_commands = load_rules("./commits_check_config.yaml")
-    # Merge additional commands and emojis with the existing ones
     commit_types.update(additional_commands)
-
-
     commit_type, props = (None, None)
     for commit_type_for_matching, props in commit_types.items():
-        if re.match(get_regex_pattern(commit_type_for_matching), commit_message.strip()):
-            commit_type, found_props = (commit_type_for_matching, props)
+        if re.match(
+            get_regex_pattern(commit_type_for_matching), commit_message.strip()
+        ):
+            commit_type, _ = (commit_type_for_matching, props)
             break
 
     if not commit_type:
@@ -54,15 +54,22 @@ def check_commit_message(commit_message, args):
             index = commit_message.find(commit_type)
             commit_message = f"{emoji} {commit_message[index:]}"
 
-            return commit_message, "🎉 Commit message follows Conventional Commits rules and has been updated with an emoji."
-
+            return (
+                commit_message,
+                "🎉 Commit message follows Conventional Commits rules and has been updated with an emoji.",
+            )
 
     return commit_message, "🎉 Commit message follows Conventional Commits rules."
+
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("commit_message_file")
-    parser.add_argument("--emoji-disabled", action="store_true", help="Disable emojis in commit messages")
+    parser.add_argument(
+        "--emoji-disabled",
+        action="store_true",
+        help="Disable emojis in commit messages",
+    )
     args = parser.parse_args()
 
     commit_message = get_commit_message(args)
