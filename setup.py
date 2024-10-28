@@ -10,7 +10,7 @@ else:
 
 setup(
     name="conventional-commits-check",
-    version="2.0.0",
+    version="2.1.0",
     description="A pre-commit hook to check Conventional Commits and add emojis.",
     author="Ali Yaman",
     packages=find_packages(),
