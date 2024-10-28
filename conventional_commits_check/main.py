@@ -3,8 +3,6 @@ import argparse
 import re
 import sys
 import yaml
-import os
-import pkg_resources
 from conventional_commits_check.commit_types import commit_types
 
 
