@@ -1,106 +1,132 @@
-# Conventional Commits Check
+# 🎉 Conventional Commits Check
 
-<img src="https://raw.githubusercontent.com/AliYmn/conventional-commits-check/master/images/result.png">
+![PyPI Version](https://img.shields.io/pypi/v/conventional-commits-check)
+![License](https://img.shields.io/github/license/AliYmn/conventional-commits-check)
+![Last Commit](https://img.shields.io/github/last-commit/AliYmn/conventional-commits-check)
+![Issues](https://img.shields.io/github/issues/AliYmn/conventional-commits-check)
+![Stars](https://img.shields.io/github/stars/AliYmn/conventional-commits-check?style=social)
+![Forks](https://img.shields.io/github/forks/AliYmn/conventional-commits-check?style=social)
+![Downloads](https://img.shields.io/pypi/dm/conventional-commits-check)
+![Contributors](https://img.shields.io/github/contributors/AliYmn/conventional-commits-check)
 
-`conventional-commits-check` is a Python pre-commit hook that enforces Conventional Commits rules on your commit messages and automatically adds relevant emojis based on the commit type.
+![Result Image](https://raw.githubusercontent.com/AliYmn/conventional-commits-check/master/images/demo.png)
 
-Conventional Commits is a lightweight convention that provides a set of rules for creating an explicit commit history. This pre-commit hook helps ensure your commit messages adhere to the convention and provides additional context with emojis.
+`conventional-commits-check` is a powerful and easy-to-use Python pre-commit hook that helps enforce [Conventional Commits](https://www.conventionalcommits.org/) rules on your commit messages. It supports adding relevant emojis based on your commit types to enhance readability and bring some fun to your commit history! 🚀
 
-# Automatic Emoji Insertion
+## 📜 What are Conventional Commits?
 
-Automatic emoji insertion at the beginning of the Commit 🎉
+Conventional Commits provide a lightweight convention for creating a clear and explicit commit history. By using this hook, you'll ensure that your commit messages follow this convention, making your versioning easier to manage and your collaboration more seamless.
 
-```json
-{
-    "feat": "✨",
-    "fix": "🐛",
-    "docs": "📚",
-    "style": "💎",
-    "refactor": "🧹",
-    "perf": "🚀",
-    "test": "🧪",
-    "build": "🏗️",
-    "ci": "👷",
-    "chore": "♻️",
-    "revert": "⏪",
+## 💡 Features
+
+- ✅ Enforces Conventional Commits rules on your commit messages.
+- 🎨 Optionally adds context-specific emojis to the start of commit messages.
+- 🛑 Blocks commits that do not conform to the Conventional Commits standard.
+- 🔧 Allows for **custom commit types** and **custom emojis** via configuration.
+- 🔄 **Auto-Merge Commit Handling**: Automatically formats auto-merge commit messages to follow a consistent style.
+
+## 🔄 Auto-Merge Commit Handling
+
+The `conventional-commits-check` tool includes functionality to handle auto-merge commit messages. When a commit message matches the pattern "Merge branch '...' into '...'", it is automatically reformatted to a more consistent style, such as "merge: branch '...' into '...'". If emojis are enabled, a 🎉 emoji is prepended to the message. This feature ensures that even auto-generated commit messages maintain a clean and readable format.
+
+## 🔧 Customization
+
+You can customize the commit types and their associated emojis by modifying the `commit_types.py` and `commits_check_config.yaml` files. These files allow you to define additional commit types and specify emojis for each type.
+
+### Example : [`commit_types.py`](https://github.com/AliYmn/conventional-commits-check/blob/master/conventional_commits_check/commit_types.py)
+
+```python
+commit_types = {
+    "access": {
+        "description": "Improve accessibility.",
+        "emoji": "♿️"
+    },
+    "analytics": {
+        "description": "Add or update analytics or track code.",
+        "emoji": "📈"
+    },
+    "animation": {
+        "description": "Add or update animations and transitions.",
+        "emoji": "💫"
+    },
+    "arch": {
+        "description": "Make architectural changes.",
+        "emoji": "🏗️"
+    },
+    "assets": {
+        "description": "Add or update assets.",
+        "emoji": "🍱"
+    },
+    "beer": {
+        "description": "Write code drunkenly.",
+        "emoji": "🍻"
+    },
+    # ... more commit types ...
 }
 ```
 
-# Customization
+### Customizing Existing Emojis
 
-```bash
-touch commits_check_config.yaml
-````
-
-`NOTE` : Please do not leave it blank if you create it.
-
-To add custom commit types and emojis, update your `commits_check_config.yaml` file with the additional_commands and additional_emojis fields. Here's an example:
+You can also modify the emojis for existing commit types by updating the `commits_check_config.yaml`:
 
 ```yaml
-additional_commands:
-  database: "^database(\\(.+\\))?:"
-  design: "^design(\\(.+\\))?:"
-
-additional_emojis:
-  database: "🗃️"
-  design: "🎨"
-````
-
-# Customization Current Emoji
-
-This is how you can change the emojis of existing commands.
-
-```yaml
-additional_commands:
-  fix: "^fix(\\(.+\\))?:"
-  feat: "^feat(\\(.+\\))?:"
-
-additional_emojis:
-  fix: "🗃️"
-  feat: "🎨"
-````
-
-## Features
-
-- Checks if commit messages follow the Conventional Commits rules.
-- Adds an emoji to the commit message based on the commit type.
-- Blocks commits with non-conforming messages.
-
-## Installation
-
-Follow these steps to add the `conventional-commits-check` pre-commit hook to your project:
-
-1. In your project's root directory, open the existing `.pre-commit-config.yaml` file (or create one if it doesn't exist) and add the following content:
-
-```yaml
-repos:
-  - repo: https://github.com/AliYmn/conventional-commits-check
-    rev: v0.3.0  # Use the latest release version
-    hooks:
-      - id: conventional-commits-check
-        stages: [commit-msg]
+additional_commit_types:
+  feat:
+    description: Introduce new features.
+    emoji: 🎉
+  fix:
+    description: Fix a bug.
+    emoji: 🛠️
 ```
 
-2. Update the pre-commit hooks in your project:
+## ⚙️ Installation
 
+To add `conventional-commits-check` to your project, follow these steps:
 
-```bash
-pre-commit install --hook-type commit-msg -f
-```
+1. **Update your `.pre-commit-config.yaml`:**
 
-3. Install the conventional-commits-check package:
+   In your project’s root directory, add the following:
 
+   ```yaml
+   repos:
+     - repo: https://github.com/AliYmn/conventional-commits-check
+       rev: v0.3.0  # Use the latest release version
+       hooks:
+         - id: conventional-commits-check
+           stages: [commit-msg]
+           args: ["--emoji-disabled"]  # Use this argument to disable emojis
+   ```
 
-```bash
-pip install -U conventional-commits-check
-```
+2. **Install the pre-commit hook:**
 
-4. You may need to update the pre-commit package;
+   ```bash
+   pre-commit install --hook-type commit-msg -f
+   ```
 
-```bash
-pre-commit autoupdate
-```
+3. **Install the `conventional-commits-check` package:**
 
-# Usage
+   ```bash
+   pip install -U conventional-commits-check
+   ```
 
-Once the hook is added to your project, it will automatically run every time you create a commit. The hook will check the commit messages according to the Conventional Commits rules and add the corresponding emojis. If a commit message does not follow the rules, the commit will be blocked.
+4. **Optional:** Update the pre-commit package:
+
+   ```bash
+   pre-commit autoupdate
+   ```
+
+## 🚀 Usage
+
+Once the hook is added, it will automatically run each time you make a commit. The hook checks your commit message against Conventional Commits rules, optionally adds the appropriate emoji, and prevents non-conforming commits.
+
+## 👨‍💻 Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests to enhance `conventional-commits-check`. Let’s make commits fun and consistent! 😄
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+Enhance your workflow and bring some life to your commits with `conventional-commits-check`! 🎉✨🐛

@@ -66,13 +66,13 @@ def handle_auto_merge_commit(commit_message, args):
     Returns:
         tuple: A tuple containing the updated commit message and a result message, or None if not an auto-merge.
     """
-    merge_match = re.match(r"^Merge branch '(.+)' into '(.+)'", commit_message.strip())
+    merge_match = re.match(r"^Merge", commit_message.strip())
     if merge_match:
-        branch_from, branch_to = merge_match.groups()
-        formatted_message = f"merge: branch '{branch_from}' into '{branch_to}'"
+        # Remove the initial "Merge" and format the message
+        formatted_message = f"merge: {commit_message[6:].strip()}"
         if not args.emoji_disabled:
             formatted_message = f"🎉 {formatted_message}"
-        return formatted_message, "🎉 Auto-merge commit message formatted."
+        return formatted_message, "✅ Auto-merge commit message successfully formatted."
     return None, None
 
 
