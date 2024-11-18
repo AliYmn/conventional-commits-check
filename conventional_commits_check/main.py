@@ -106,7 +106,7 @@ def load_rules_from_yaml(config_file):
         dict: A dictionary of additional commit types.
     """
     try:
-        with open(config_file, 'r') as file:
+        with open(config_file, "r") as file:
             config_data = yaml.safe_load(file)
             return config_data.get("additional_commit_types", {})
     except FileNotFoundError:
