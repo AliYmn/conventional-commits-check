@@ -126,20 +126,20 @@ class TestCommitCheck(unittest.TestCase):
     @patch(
         "builtins.open",
         new_callable=mock_open,
-        read_data="Merge branch 'feature-branch' into 'main'",
+        read_data="Merge remote-tracking branch 'origin' into staging",
     )
     def test_handle_auto_merge_commit(self, mock_file):
         # Test with an auto-merge commit message
         args = type("", (), {})()
         args.commit_message_file = "test_message.txt"
         args.emoji_disabled = False
-        commit_message = "Merge branch 'feature-branch' into 'main'"
+        commit_message = "Merge remote-tracking branch 'origin' into staging"
 
         updated_message, result = check_commit_message(commit_message, args)
         self.assertEqual(
-            updated_message, "🎉 merge: branch 'feature-branch' into 'main'"
+            updated_message, "🎉 merge: remote-tracking branch 'origin' into staging"
         )
-        self.assertEqual(result, "🎉 Auto-merge commit message formatted.")
+        self.assertEqual(result, "✅ Auto-merge commit message successfully formatted.")
 
     @patch(
         "builtins.open",
@@ -155,7 +155,7 @@ class TestCommitCheck(unittest.TestCase):
 
         updated_message, result = check_commit_message(commit_message, args)
         self.assertEqual(updated_message, "merge: branch 'feature-branch' into 'main'")
-        self.assertEqual(result, "🎉 Auto-merge commit message formatted.")
+        self.assertEqual(result, "✅ Auto-merge commit message successfully formatted.")
 
 
 if __name__ == "__main__":

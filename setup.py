@@ -8,9 +8,6 @@ else:
     with open("README.md", encoding="utf-8") as f:
         README = f.read()
 
-with open("requirements.txt") as f:
-    requirements = f.read().splitlines()
-
 setup(
     name="conventional-commits-check",
     version="2.7.0",
@@ -21,7 +18,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=README,
     url="https://github.com/AliYmn/conventional-commits-check",
-    install_requires=requirements,
+    install_requires=["pyyaml==6.0.2"],
     entry_points={
         "console_scripts": [
             "conventional-commits-check = conventional_commits_check.main:main"
@@ -34,12 +31,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.0",
-        "Programming Language :: Python :: 3.1",
-        "Programming Language :: Python :: 3.2",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
