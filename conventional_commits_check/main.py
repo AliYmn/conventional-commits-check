@@ -55,6 +55,27 @@ def update_commit_message(args, commit_message):
         file.write(commit_message)
 
 
+def handle_auto_merge_commit(commit_message, args):
+    """
+    Handles auto-merge commit messages by formatting them and adding an emoji if applicable.
+
+    Args:
+        commit_message (str): The commit message to check.
+        args: Command line arguments.
+
+    Returns:
+        tuple: A tuple containing the updated commit message and a result message, or None if not an auto-merge.
+    """
+    merge_match = re.match(r"^Merge branch '(.+)' into '(.+)'", commit_message.strip())
+    if merge_match:
+        branch_from, branch_to = merge_match.groups()
+        formatted_message = f"merge: branch '{branch_from}' into '{branch_to}'"
+        if not args.emoji_disabled:
+            formatted_message = f"🎉 {formatted_message}"
+        return formatted_message, "🎉 Auto-merge commit message formatted."
+    return None, None
+
+
 def check_commit_message(commit_message, args):
     """
     Checks if the commit message follows Conventional Commits rules and updates it with an emoji if applicable.
@@ -66,6 +87,11 @@ def check_commit_message(commit_message, args):
     Returns:
         tuple: A tuple containing the updated commit message and a result message.
     """
+    # Handle auto-merge commit messages
+    auto_merge_result = handle_auto_merge_commit(commit_message, args)
+    if auto_merge_result[0]:
+        return auto_merge_result
+
     commit_types = load_rules()
     additional_commands = load_rules_from_yaml("./commits_check_config.yaml")
     commit_types.update(additional_commands)

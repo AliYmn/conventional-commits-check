@@ -23,6 +23,11 @@ Conventional Commits provide a lightweight convention for creating a clear and e
 - 🎨 Optionally adds context-specific emojis to the start of commit messages.
 - 🛑 Blocks commits that do not conform to the Conventional Commits standard.
 - 🔧 Allows for **custom commit types** and **custom emojis** via configuration.
+- 🔄 **Auto-Merge Commit Handling**: Automatically formats auto-merge commit messages to follow a consistent style.
+
+## 🔄 Auto-Merge Commit Handling
+
+The `conventional-commits-check` tool includes functionality to handle auto-merge commit messages. When a commit message matches the pattern "Merge branch '...' into '...'", it is automatically reformatted to a more consistent style, such as "merge: branch '...' into '...'". If emojis are enabled, a 🎉 emoji is prepended to the message. This feature ensures that even auto-generated commit messages maintain a clean and readable format.
 
 ## 🔧 Customization
 
