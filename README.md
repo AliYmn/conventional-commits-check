@@ -90,7 +90,7 @@ To add `conventional-commits-check` to your project, follow these steps:
    ```yaml
    repos:
      - repo: https://github.com/AliYmn/conventional-commits-check
-       rev: v0.3.0  # Use the latest release version
+       rev: v2.9.0  # Use the latest release version
        hooks:
          - id: conventional-commits-check
            stages: [commit-msg]
